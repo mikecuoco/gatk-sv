@@ -39,13 +39,13 @@ RUN apt-get -qqy update --fix-missing && \
            /usr/share/man/??_*
 
 # Add melt jar
-ARG MELT_RELEASE=2.0.5
+ARG MELT_RELEASE=2.2.2
 ARG MELT_DIR="/MELT/"
 RUN mkdir -p ${MELT_DIR}
 WORKDIR ${MELT_DIR}
-ADD MELTv${MELT_RELEASE}_patch.tar.gz .
-RUN echo "export PATH=${MELT_DIR}/MELTv${MELT_RELEASE}_patch/:$PATH" > /etc/profile.d/MELT.sh
-ENV PATH="${MELT_DIR}/MELTv${MELT_RELEASE}_patch/:$PATH"
+ADD dockerfiles/melt/MELTv${MELT_RELEASE}.tar.gz .
+RUN echo "export PATH=${MELT_DIR}/MELTv${MELT_RELEASE}/:$PATH" > /etc/profile.d/MELT.sh
+ENV PATH="${MELT_DIR}/MELTv${MELT_RELEASE}/:$PATH"
 
 # Add master script
 COPY dockerfiles/melt/run_MELT_${MELT_RELEASE}.sh .
